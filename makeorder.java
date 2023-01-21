@@ -100,16 +100,18 @@ class MO extends JFrame implements ActionListener
             id4 = t4.getText();
             id5 = t5.getText();
             Connection connection = DriverManager.getConnection(jdbcURL, username, password);
-            System.out.println("Connected");
-            String sql = "insert into orders values (?, ?, ?, ?, ?)";
-            PreparedStatement stmt = connection.prepareStatement(sql);
-            stmt.setString(1,id1);
-            stmt.setString(2,id2);
-            stmt.setString(3,id3);
-            stmt.setString(4,id4);
-            stmt.setString(5,id5);
-            stmt.executeUpdate();
-            connection.close();
+            if(id1!=""){
+                System.out.println("Connected");
+                String sql = "insert into orders values (?, ?, ?, ?, ?)";
+                PreparedStatement stmt = connection.prepareStatement(sql);
+                stmt.setString(1,id1);
+                stmt.setString(2,id2);
+                stmt.setString(3,id3);
+                stmt.setString(4,id4);
+                stmt.setString(5,id5);
+                stmt.executeUpdate();
+                connection.close();
+                }
             }
             catch(SQLException ae){
                 System.out.println("Exception");

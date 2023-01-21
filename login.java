@@ -1,6 +1,5 @@
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
@@ -8,7 +7,6 @@ import java.sql.SQLException;
 import java.lang.String;
 
 class LoginPage extends JFrame implements ActionListener {
-
     private JLabel signinasLabel;
     private JLabel usernameLabel;
     private JLabel passwordLabel;
@@ -87,7 +85,7 @@ class LoginPage extends JFrame implements ActionListener {
                     if(st.next()){
                         CustomerPage cp = new CustomerPage();
                         cp.setVisible(true);
-                        cp.setSize(1540,800);
+                        cp.setSize(800,600);
                     }
                 }
                 else if(text.equals("Retailer")){
@@ -99,14 +97,14 @@ class LoginPage extends JFrame implements ActionListener {
                     if(st.next()){
                         RetailerPage rp = new RetailerPage();
                         rp.setVisible(true);
-                        rp.setSize(1540,800);
+                        rp.setSize(800,600);
                         }
                 }
                 else if(text.equals("Admin")){
                     if(us.equals("Admin") && pa.equals("1234")){
                         AdminPage ap  = new AdminPage();
                         ap.setVisible(true);
-                        ap.setSize(1540,800);
+                        ap.setSize(800,600);
                     }
                 }}
 
@@ -116,8 +114,8 @@ class LoginPage extends JFrame implements ActionListener {
                     ae.printStackTrace();
                 }
            
-        
-}}
+        }
+}
 
 public class login{
     public static void main(String[] args) {
