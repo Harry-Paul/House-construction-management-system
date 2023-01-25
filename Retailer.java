@@ -18,6 +18,7 @@ class RetailerPage extends JFrame{
     Image img2;
     Image img3;
     RetailerPage(){
+        
         head= new JPanel();
         head.setBackground(Color.DARK_GRAY);
         head.setBounds(0,0,800,100);
@@ -35,12 +36,11 @@ class RetailerPage extends JFrame{
         i1 = new ImageIcon("makeorder4.jpg");
         i2 = new ImageIcon("makepayment2.png");
         i3 = new ImageIcon("viewprojects.jpg");
-        //img1 = new ImageIcon("makeorder.jpg");
         img1 =  i1.getImage();
         img2 = i2.getImage();
         img3 = i3.getImage();
         Image r1 = img1.getScaledInstance(200, 250,java.awt.Image.SCALE_SMOOTH);
-        Image r2 = img2.getScaledInstance(300, 250,  java.awt.Image.SCALE_SMOOTH);
+        Image r2 = img2.getScaledInstance(250, 250,  java.awt.Image.SCALE_SMOOTH);
         Image r3 = img3.getScaledInstance(350, 250,  java.awt.Image.SCALE_SMOOTH);
         title.setFont (title.getFont().deriveFont(64.0f));
         head.add(title);
@@ -62,13 +62,15 @@ class RetailerPage extends JFrame{
         Body.add(h2);
         Body.add(h3);
         this.add(Body);
-    };
+        this.setVisible(true);
+        this.setSize(800,600);
+        this.setLocationRelativeTo(null);
+    }
 }
 
 public class Retailer {
     public static void main(String args[]){
         RetailerPage cus = new RetailerPage();
-        cus.setVisible(true);
-        cus.setSize(1540,1080);
+        
     }
 }

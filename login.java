@@ -20,10 +20,8 @@ class LoginPage extends JFrame implements ActionListener {
 
     public LoginPage() {
         super("Login Page");
-        this.setSize(800, 800);
-        this.
-
         setLayout(new GridBagLayout());
+        this.setLocationRelativeTo(null);
         GridBagConstraints constraints = new GridBagConstraints();
 
         signinasLabel = new JLabel("Sign in as");
@@ -66,7 +64,9 @@ class LoginPage extends JFrame implements ActionListener {
         constraints.gridy = 3;
         constraints.gridwidth = 2;
         add(loginButton, constraints);
-
+        this.setVisible(true);
+        this.setSize(400,400);
+        this.setLocationRelativeTo(null); 
         loginButton.addActionListener(this); }
 
             public void actionPerformed(ActionEvent e) {
@@ -112,16 +112,13 @@ class LoginPage extends JFrame implements ActionListener {
                 catch(SQLException ae){
                     System.out.println("Exception");
                     ae.printStackTrace();
-                }
-           
+                }    
         }
 }
 
 public class login{
     public static void main(String[] args) {
-        LoginPage lp =new LoginPage();
-        lp.setVisible(true);
-        lp.setSize(800,800);
+        LoginPage lp = new LoginPage();
     }
 }
 

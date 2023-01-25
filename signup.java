@@ -34,9 +34,9 @@ class signuppage extends JFrame implements ActionListener{
     public signuppage() {
         super("Signup Page");
         this.setSize(800, 800);
-        this.
 
         setLayout(new GridBagLayout());
+        
         GridBagConstraints constraints = new GridBagConstraints();
 
         signinasLabel = new JLabel("Sign up as");
@@ -125,6 +125,9 @@ class signuppage extends JFrame implements ActionListener{
         constraints.gridy = 7;
         constraints.gridwidth = 2;
         add(loginButton, constraints);
+        this.setVisible(true);
+        this.setSize(600,600);
+        this.setLocationRelativeTo(null); 
         loginButton.addActionListener(this);}
             public void actionPerformed(ActionEvent e) {
                 try{
@@ -155,8 +158,6 @@ class signuppage extends JFrame implements ActionListener{
                         stmt.setString(6,pa);
                         stmt.executeUpdate();
                         LoginPage ap = new LoginPage();
-                        ap.setVisible(true);
-                        ap.setSize(300,300);
                         connection.close();
                         dispose();
                     }
@@ -164,8 +165,7 @@ class signuppage extends JFrame implements ActionListener{
                     catch(SQLException ae){
                         System.out.println("Exception");
                         ae.printStackTrace();
-                    }
-               
+                    }   
         }
  }
 
@@ -174,7 +174,5 @@ class signuppage extends JFrame implements ActionListener{
 public class signup{
 public static void main(String[] args) {
     signuppage sp = new signuppage();
-    sp.setVisible(true);
-    sp.setSize(800,800);
 }
 }

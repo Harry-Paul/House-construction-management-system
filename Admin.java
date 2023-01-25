@@ -36,12 +36,11 @@ class AdminPage extends JFrame implements ActionListener{
         i1 = new ImageIcon("makeorder4.jpg");
         i2 = new ImageIcon("makepayment2.png");
         i3 = new ImageIcon("viewprojects.jpg");
-        //img1 = new ImageIcon("makeorder.jpg");
         img1 =  i1.getImage();
         img2 = i2.getImage();
         img3 = i3.getImage();
         Image r1 = img1.getScaledInstance(200, 250,java.awt.Image.SCALE_SMOOTH);
-        Image r2 = img2.getScaledInstance(300, 250,  java.awt.Image.SCALE_SMOOTH);
+        Image r2 = img2.getScaledInstance(250, 250,  java.awt.Image.SCALE_SMOOTH);
         Image r3 = img3.getScaledInstance(350, 250,  java.awt.Image.SCALE_SMOOTH);
         title.setFont (title.getFont().deriveFont(64.0f));
         head.add(title);
@@ -63,18 +62,17 @@ class AdminPage extends JFrame implements ActionListener{
         Body.add(h2);
         Body.add(h3);
         this.add(Body);
+        this.setVisible(true);
+        this.setSize(800,600);
+        this.setLocationRelativeTo(null); 
         b1.addActionListener(this); }
         public void actionPerformed(ActionEvent e) {
             MO m = new MO();
-            m.setVisible(true);
-            m.setSize(500,500);
         }        
 }
 
 public class Admin {
     public static void main(String args[]){
         AdminPage cus = new AdminPage();
-        cus.setVisible(true);
-        cus.setSize(800,600);
     }
 } 

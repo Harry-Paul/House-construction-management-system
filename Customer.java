@@ -19,6 +19,7 @@ class CustomerPage extends JFrame{
     Image img2;
     Image img3;
     CustomerPage(){
+        this.setLocationRelativeTo(null);
         head= new JPanel();
         head.setBackground(Color.DARK_GRAY);
         head.setBounds(0,0,800,100);
