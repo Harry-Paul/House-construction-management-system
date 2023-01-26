@@ -18,7 +18,9 @@ class CustomerPage extends JFrame{
     Image img1;
     Image img2;
     Image img3;
-    CustomerPage(){
+    String CustomerID;
+    CustomerPage(String a){
+        CustomerID = a;
         this.setLocationRelativeTo(null);
         head= new JPanel();
         head.setBackground(Color.DARK_GRAY);
@@ -69,7 +71,7 @@ class CustomerPage extends JFrame{
 
 public class Customer {
     public static void main(String args[]){
-        CustomerPage cus = new CustomerPage();
+        CustomerPage cus = new CustomerPage("abcd");
         cus.setVisible(true);
         cus.setSize(800,600);
     }

@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
-class RetailerPage extends JFrame{
+import java.awt.event.*;
+class RetailerPage extends JFrame implements ActionListener{
     JLabel title;
     JLabel h1;
     JLabel h2;
@@ -17,14 +18,17 @@ class RetailerPage extends JFrame{
     Image img1;
     Image img2;
     Image img3;
-    RetailerPage(){
+    String RetailerID;
+    RetailerPage(String a){
+
+        RetailerID = a;
         
         head= new JPanel();
         head.setBackground(Color.DARK_GRAY);
         head.setBounds(0,0,800,100);
         JLabel title = new JLabel("<html><span style='color: teal;'>Retailer</span></html>");
         title.setFont (title.getFont().deriveFont(64.0f));
-        h1 = new JLabel("<html><span style='color: teal;'>Make Order</span></html>");
+        h1 = new JLabel("<html><span style='color: teal;'>Accept Orders</span></html>");
         h1.setFont (title.getFont().deriveFont(20.0f));
         h1.setBounds(100,475,200,20);
         h2 = new JLabel("<html><span style='color: teal;'>Make Payment</span></html>");
@@ -62,15 +66,20 @@ class RetailerPage extends JFrame{
         Body.add(h2);
         Body.add(h3);
         this.add(Body);
+        b1.addActionListener(this);
         this.setVisible(true);
         this.setSize(800,600);
         this.setLocationRelativeTo(null);
     }
+    public void actionPerformed(ActionEvent e){
+        acceptorderPage ap = new acceptorderPage(RetailerID);
+    }
+        
 }
 
 public class Retailer {
     public static void main(String args[]){
-        RetailerPage cus = new RetailerPage();
+        RetailerPage cus = new RetailerPage("abcd");
         
     }
 }

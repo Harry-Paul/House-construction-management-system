@@ -129,6 +129,11 @@ class signuppage extends JFrame implements ActionListener{
         this.setSize(600,600);
         this.setLocationRelativeTo(null); 
         loginButton.addActionListener(this);}
+        public void dialogbox(){
+            JFrame frame = new JFrame("Main Window");
+          
+           JOptionPane.showMessageDialog(frame, "Enter Valid Data","Error", JOptionPane.ERROR_MESSAGE);
+        }
             public void actionPerformed(ActionEvent e) {
                 try{
                     id1 = t1.getText();
@@ -162,7 +167,8 @@ class signuppage extends JFrame implements ActionListener{
                         dispose();
                     }
                     }
-                    catch(SQLException ae){
+                    catch(Exception ae){
+                        dialogbox();
                         System.out.println("Exception");
                         ae.printStackTrace();
                     }   

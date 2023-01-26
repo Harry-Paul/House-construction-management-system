@@ -68,6 +68,16 @@ class LoginPage extends JFrame implements ActionListener {
         this.setSize(400,400);
         this.setLocationRelativeTo(null); 
         loginButton.addActionListener(this); }
+        public void dialogbox(){
+            JFrame frame = new JFrame("Main Window");
+          
+           JOptionPane.showMessageDialog(frame, "Enter Valid Data","Error", JOptionPane.ERROR_MESSAGE);
+        }
+        public void usernotfound(){
+            JFrame frame = new JFrame("Main Window");
+          
+           JOptionPane.showMessageDialog(frame, "User not found or Wrong password","Error", JOptionPane.ERROR_MESSAGE);
+        }
 
             public void actionPerformed(ActionEvent e) {
                 try{
@@ -83,9 +93,12 @@ class LoginPage extends JFrame implements ActionListener {
                     stmt.setString(2,pa);
                     ResultSet st = stmt.executeQuery();
                     if(st.next()){
-                        CustomerPage cp = new CustomerPage();
+                        CustomerPage cp = new CustomerPage(us);
                         cp.setVisible(true);
                         cp.setSize(800,600);
+                    }
+                    else{
+                        usernotfound();
                     }
                 }
                 else if(text.equals("Retailer")){
@@ -95,10 +108,13 @@ class LoginPage extends JFrame implements ActionListener {
                     stmt.setString(2,pa);
                     ResultSet st = stmt.executeQuery();
                     if(st.next()){
-                        RetailerPage rp = new RetailerPage();
+                        RetailerPage rp = new RetailerPage(us);
                         rp.setVisible(true);
                         rp.setSize(800,600);
                         }
+                    else{
+                        usernotfound();
+                    }
                 }
                 else if(text.equals("Admin")){
                     if(us.equals("Admin") && pa.equals("1234")){
@@ -106,10 +122,14 @@ class LoginPage extends JFrame implements ActionListener {
                         ap.setVisible(true);
                         ap.setSize(800,600);
                     }
+                    else{
+                        usernotfound();
+                    }
                 }}
 
                 
-                catch(SQLException ae){
+                catch(Exception ae){
+                    dialogbox();
                     System.out.println("Exception");
                     ae.printStackTrace();
                 }    

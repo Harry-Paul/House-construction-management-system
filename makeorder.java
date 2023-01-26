@@ -161,6 +161,14 @@ class MO extends JFrame implements ActionListener
         b1.addActionListener(this);     
         setTitle("New Order");          
     }
+    public void dialogbox(){
+        JFrame frame = new JFrame("Main Window");
+      
+       JOptionPane.showMessageDialog(frame, "Enter Valid Data","Error", JOptionPane.ERROR_MESSAGE);
+    }
+    public void loaddata(){
+        
+    }
     
     public void actionPerformed(ActionEvent e){
                 
@@ -177,11 +185,12 @@ class MO extends JFrame implements ActionListener
                 if(st.next()){
                 rate = st.getInt("price") * id5;
                 Rate =Integer.toString(rate);
-               u7.setText(Rate);
-               System.out.println(Rate);
+                u7.setText(Rate);
+                System.out.println(Rate);
                 }
             }
-            catch(SQLException ae){
+            catch(Exception ae){
+                dialogbox();
                 System.out.println("Exception");
                 ae.printStackTrace();
             }
@@ -197,6 +206,10 @@ class MO extends JFrame implements ActionListener
                 id3 = t3.getText();
                 id4 = t4.getText();
                 id6 = Integer.parseInt(t5.getText());
+                if(id1==""){
+                    JOptionPane.showMessageDialog(this, "Enter a valid Number",
+                                   "ERROR", JOptionPane.ERROR_MESSAGE);
+                }
                     System.out.println("Connected");
                     String sql = "insert into orders values (?, ?, ?, ?, ?, ?)";
                     PreparedStatement stmt = connection.prepareStatement(sql);
@@ -210,7 +223,8 @@ class MO extends JFrame implements ActionListener
                     connection.close();
                     }
                 }
-                catch(SQLException ae){
+                catch(Exception ae){
+                    dialogbox();
                     System.out.println("Exception");
                     ae.printStackTrace();
                 }
