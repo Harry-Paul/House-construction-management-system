@@ -34,7 +34,7 @@ class RetailerPage extends JFrame implements ActionListener{
         h2 = new JLabel("<html><span style='color: teal;'>Make Payment</span></html>");
         h2.setFont (title.getFont().deriveFont(20.0f));
         h2.setBounds(330,475,200,20);
-        h3 = new JLabel("<html><span style='color: teal;'>View Projects</span></html>");
+        h3 = new JLabel("<html><span style='color: teal;'>Add Commodities</span></html>");
         h3.setFont (title.getFont().deriveFont(20.0f));
         h3.setBounds(580,475,200,20);
         i1 = new ImageIcon("makeorder4.jpg");
@@ -67,19 +67,23 @@ class RetailerPage extends JFrame implements ActionListener{
         Body.add(h3);
         this.add(Body);
         b1.addActionListener(this);
+        b3.addActionListener(this);
         this.setVisible(true);
         this.setSize(800,600);
         this.setLocationRelativeTo(null);
     }
     public void actionPerformed(ActionEvent e){
-        acceptorderPage ap = new acceptorderPage(RetailerID);
+        if(e.getSource()==b1){
+            acceptorderPage ap = new acceptorderPage(RetailerID);
+        }
+        else if(e.getSource()==b3){
+            addcommoditiesPage ac = new addcommoditiesPage(RetailerID);
+        }
     }
-        
 }
 
 public class Retailer {
     public static void main(String args[]){
         RetailerPage cus = new RetailerPage("abcd");
-        
     }
 }

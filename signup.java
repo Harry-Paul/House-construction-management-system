@@ -40,7 +40,7 @@ class signuppage extends JFrame implements ActionListener{
         GridBagConstraints constraints = new GridBagConstraints();
 
         signinasLabel = new JLabel("Sign up as");
-        u1 = new JLabel("ID");
+        u1 = new JLabel("Username");
         u2 = new JLabel("Name");
         u3 = new JLabel("Phone No");
         u4 = new JLabel("Address");
@@ -125,6 +125,7 @@ class signuppage extends JFrame implements ActionListener{
         constraints.gridy = 7;
         constraints.gridwidth = 2;
         add(loginButton, constraints);
+        this.setBackground(Color.BLACK);
         this.setVisible(true);
         this.setSize(600,600);
         this.setLocationRelativeTo(null); 
@@ -145,23 +146,57 @@ class signuppage extends JFrame implements ActionListener{
                     String text = (String)siginasComboBox.getSelectedItem();
                     String pa = new String(passwordField.getPassword());
                     Connection connection = DriverManager.getConnection(jdbcURL, username, password);
-                    
+
                     if(id1!=""){
                     System.out.println("Connected");
-                    String sql= "insert into customers values (?, ?, ?, ?, ?, ?)";
+                    String sql= "insert into customers values (?, ?, ?, ?, ?)";
+                    String sql1 = "insert into customer_auth values(?,?,?)";
+                    String id="cid";
                     if(text.equals("Customer")){
-                    sql = "insert into customers values (?, ?, ?, ?, ?, ?)";}
+                        sql = "insert into customers values (?, ?, ?, ?, ?)";
+                        sql1 = "insert into customer_auth values(?,?,?)";
+                        String s = "select max(customer_id) from customers";
+                        String sq = "select * from customers";
+                        PreparedStatement st = connection.prepareStatement(s);
+                        PreparedStatement stm = connection.prepareStatement(sq);
+                        ResultSet r = st.executeQuery();
+                        ResultSet rs = stm.executeQuery();
+                        id = "c1";
+                        if(r.next() && rs.next()){
+                            String a = r.getString("max");
+                            String w = a.substring(1);
+                            id = "c"+Integer.toString(Integer.parseInt(w)+1);
+                        }
+                    }
                     else if(text.equals("Retailer")){
-                        sql = "insert into retailers values (?, ?, ?, ?, ?, ?)";}  
-
+                        sql = "insert into retailers values (?, ?, ?, ?, ?)";
+                        sql1 = "insert into retailer_auth values(?,?,?)";
+                        String s1 = "select max(retailer_id) from retailers";
+                        String sq1 = "select * from retailers";
+                        PreparedStatement st1 = connection.prepareStatement(s1);
+                        PreparedStatement stm1 = connection.prepareStatement(sq1);
+                        ResultSet r1 = st1.executeQuery();
+                        ResultSet rs1 = stm1.executeQuery();
+                        id = "r1";
+                        if(r1.next() && rs1.next()){
+                            String a = r1.getString("max");
+                            String w = a.substring(1);
+                            id ="r" +Integer.toString(Integer.parseInt(w)+1);
+                        }
+                    }  
                         PreparedStatement stmt = connection.prepareStatement(sql);
-                        stmt.setString(1,id1);
+                        stmt.setString(1,id);
                         stmt.setString(2,id2);
                         stmt.setString(3,id3);
                         stmt.setString(4,id4);
                         stmt.setString(5,id5);
-                        stmt.setString(6,pa);
                         stmt.executeUpdate();
+
+                        PreparedStatement stmt1 = connection.prepareStatement(sql1);
+                        stmt1.setString(1,id);
+                        stmt1.setString(2,id1);
+                        stmt1.setString(3,pa);
+                        stmt1.executeUpdate();
                         LoginPage ap = new LoginPage();
                         connection.close();
                         dispose();

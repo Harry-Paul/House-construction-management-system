@@ -40,7 +40,6 @@ class MO extends JFrame implements ActionListener
         Body.setBounds(0,0,500,300);
         Head.setLayout(new GridBagLayout());      
         GridBagConstraints constraints = new GridBagConstraints();
-        u1 = new JLabel("Order_ID");
         u2 = new JLabel("Commodity ID");
         u3 = new JLabel("Retailer ID");
         u4 = new JLabel("Project ID");
@@ -126,25 +125,27 @@ class MO extends JFrame implements ActionListener
         table.setFillsViewportHeight(true);
 
         defaultTableModel.addColumn("Commodity ID");
-        defaultTableModel.addColumn("Commodity");
+        defaultTableModel.addColumn("Retailer ID");
         defaultTableModel.addColumn("Quantity");
-        defaultTableModel.addColumn("Price");
+        defaultTableModel.addColumn("Unit");
+        defaultTableModel.addColumn("Price Per Unit");
         Body.add(new JScrollPane(table));
         this.add(Head);
         this.add(Body);
         try{
             Connection connection = DriverManager.getConnection(jdbcURL, username, password);
-            String sql= "select * from commodities";
+            String sql= "select * from retailer_commodities order by comm_id, retailer_id";
             PreparedStatement stmt = connection.prepareStatement(sql);
             ResultSet st = stmt.executeQuery();
             int i=0;
             while(st.next()){
                 String coid = st.getString("comm_id");
-                String coname = st.getString("comm_name");
+                String rid = st.getString("retailer_id");
                 int qua = st.getInt("quantity");
-                int price = st.getInt("quantity");
+                String unit = st.getString("unit");
+                int ppu = st.getInt("price_per_unit");
                 i++;
-                defaultTableModel.addRow(new Object[]{coid,coname,qua,price});
+                defaultTableModel.addRow(new Object[]{coid,rid,qua,unit,ppu});
                 System.out.println("a");
                 
 
@@ -175,9 +176,10 @@ class MO extends JFrame implements ActionListener
         if(e.getSource() == calculate){
             try{
                 id2 = t2.getText();
+                id3 = t3.getText();
                 id5 = Integer.parseInt(t5.getText());
                 Connection connection = DriverManager.getConnection(jdbcURL, username, password);
-                String sql = "select price from commodities where comm_id = ?";
+                String sql = "select price from retailer_commodities where comm_id = ? and retailer_id=?";
                 PreparedStatement stmt = connection.prepareStatement(sql);
                 stmt.setString(1,id2);
                 System.out.println(id2);
@@ -200,8 +202,19 @@ class MO extends JFrame implements ActionListener
                 
 
                 Connection connection = DriverManager.getConnection(jdbcURL, username, password);
+                String sql3 = "select max(order_id) from orders";
+                String sql2 = "select * from orders";
+                PreparedStatement st3 = connection.prepareStatement(sql3);
+                PreparedStatement st2 = connection.prepareStatement(sql2);
+                ResultSet rs3 = st3.executeQuery();
+                ResultSet rs2 = st2.executeQuery();
+                String oid = "o1";
+                if(rs3.next() && rs2.next()){
+                    String q = rs3.getString("max");
+                    String w = q.substring(1);
+                    oid = Integer.toString(Integer.parseInt(w)+1);
+                }
                 if(id1!=""){
-                    id1 = t1.getText();
                 id2 = t2.getText();
                 id3 = t3.getText();
                 id4 = t4.getText();
@@ -213,7 +226,7 @@ class MO extends JFrame implements ActionListener
                     System.out.println("Connected");
                     String sql = "insert into orders values (?, ?, ?, ?, ?, ?)";
                     PreparedStatement stmt = connection.prepareStatement(sql);
-                    stmt.setString(1,id1);
+                    stmt.setString(1,oid);
                     stmt.setString(2,id2);
                     stmt.setString(3,id3);
                     stmt.setString(4,id4);

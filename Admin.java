@@ -65,9 +65,17 @@ class AdminPage extends JFrame implements ActionListener{
         this.setVisible(true);
         this.setSize(800,600);
         this.setLocationRelativeTo(null); 
-        b1.addActionListener(this); }
+        b1.addActionListener(this);
+        b2.addActionListener(this);
+        b3.addActionListener(this); }
         public void actionPerformed(ActionEvent e) {
-            MO m = new MO();
+            if(e.getSource()==b1){
+                MO m = new MO();}
+            else if(e.getSource()==b2){
+                makepaymentPage mp = new makepaymentPage();
+            }
+            else if(e.getSource()==b3){
+            }
         }        
 }
 

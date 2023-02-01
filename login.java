@@ -87,7 +87,7 @@ class LoginPage extends JFrame implements ActionListener {
 
                 Connection connection = DriverManager.getConnection(jdbcURL, username, password);
                 if(text.equals("Customer")){
-                    String sql= "select * from customers where customer_id= ? and password=?";
+                    String sql= "select * from customer_auth where username= ? and password=?";
                     PreparedStatement stmt = connection.prepareStatement(sql);
                     stmt.setString(1,us);
                     stmt.setString(2,pa);
@@ -102,7 +102,7 @@ class LoginPage extends JFrame implements ActionListener {
                     }
                 }
                 else if(text.equals("Retailer")){
-                    String sql= "select * from retailers where retailer_id=? and password=?";
+                    String sql= "select * from retailer_auth where username=? and password=?";
                     PreparedStatement stmt = connection.prepareStatement(sql);
                     stmt.setString(1,us);
                     stmt.setString(2,pa);
