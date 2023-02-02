@@ -5,7 +5,7 @@ import java.sql.*;
 import java.sql.SQLException;
 import javax.swing.table.DefaultTableModel;
 
-class MO extends JFrame implements ActionListener  
+class NO extends JFrame implements ActionListener  
 {   
     JButton b1;   
     JButton calculate;
@@ -32,7 +32,7 @@ class MO extends JFrame implements ActionListener
     JTable table;
     JPanel Body;
     JPanel Head;
-    MO()  
+    NO()  
     {   
         Head = new JPanel();
         Body = new JPanel();
@@ -240,8 +240,8 @@ class MO extends JFrame implements ActionListener
         
 }
 
-public class makeorder {
+public class neworder {
     public static void main(String args[]){
-        MO mk = new MO();
+        NO mk = new NO();
     }
 }

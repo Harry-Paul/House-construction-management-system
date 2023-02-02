@@ -125,7 +125,6 @@ class signuppage extends JFrame implements ActionListener{
         constraints.gridy = 7;
         constraints.gridwidth = 2;
         add(loginButton, constraints);
-        this.setBackground(Color.BLACK);
         this.setVisible(true);
         this.setSize(600,600);
         this.setLocationRelativeTo(null); 
@@ -200,6 +199,9 @@ class signuppage extends JFrame implements ActionListener{
                         LoginPage ap = new LoginPage();
                         connection.close();
                         dispose();
+                    }
+                    else{
+                        dialogbox();
                     }
                     }
                     catch(Exception ae){

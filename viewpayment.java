@@ -22,6 +22,10 @@ class veiwpaymentPage extends JFrame{
         defaultTableModel.addColumn("Order ID");
         defaultTableModel.addColumn("Amount");
         this.add(new JScrollPane(table));
+        this.setVisible(true);
+        this.setSize(600,600);
+        this.setLocationRelativeTo(null);      
+        this.setTitle("View Payment");  
         try{
             Connection connection = DriverManager.getConnection(jdbcURL, username, password);
             String sql= "select * from payment_retailer";
@@ -44,9 +48,16 @@ class veiwpaymentPage extends JFrame{
             ae.printStackTrace();
         } 
     }
+    public void dialogbox(){
+        JFrame frame = new JFrame("Main Window");
+      
+       JOptionPane.showMessageDialog(frame, "Enter Valid Data","Error", JOptionPane.ERROR_MESSAGE);
+    }
+    
+    
 }
 public class viewpayment {
-    public static void mani(String args[]){
-        viewpaymentPage vp = new viewpaymentPage();
+    public static void main(String args[]){
+        veiwpaymentPage vp = new veiwpaymentPage();
     }
 }

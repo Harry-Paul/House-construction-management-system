@@ -30,7 +30,7 @@ class AdminPage extends JFrame implements ActionListener{
         h2 = new JLabel("<html><span style='color: teal;'>Make Payment</span></html>");
         h2.setFont (title.getFont().deriveFont(20.0f));
         h2.setBounds(330,475,200,20);
-        h3 = new JLabel("<html><span style='color: teal;'>View Projects</span></html>");
+        h3 = new JLabel("<html><span style='color: teal;'></span></html>");
         h3.setFont (title.getFont().deriveFont(20.0f));
         h3.setBounds(580,475,200,20);
         i1 = new ImageIcon("makeorder4.jpg");

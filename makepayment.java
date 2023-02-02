@@ -92,16 +92,13 @@ class makepaymentPage extends JFrame implements ActionListener
             String sql= "select * from payment_retailer";
             PreparedStatement stmt = connection.prepareStatement(sql);
             ResultSet st = stmt.executeQuery();
-            int i=0;
             while(st.next()){
                 String prid = st.getString("payment_retailer_id");
                 String rid = st.getString("retailer_id");
                 String oid = st.getString("order_id");
                 int amount = st.getInt("to_recieve");
-                i++;
                 defaultTableModel.addRow(new Object[]{prid,rid,oid,amount});
-                System.out.println("a");
-                
+               
 
             }
         }

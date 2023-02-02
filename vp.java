@@ -5,7 +5,7 @@ import java.sql.*;
 import java.sql.SQLException;
 import javax.swing.table.DefaultTableModel;
 
-class viewprojectsPage extends JFrame{
+class vpPage extends JFrame{
 
     final String jdbcURL = "jdbc:postgresql://localhost:5432/HCMS";
     final String username = "postgres";
@@ -15,7 +15,7 @@ class viewprojectsPage extends JFrame{
     String Amount;
     DefaultTableModel defaultTableModel;
     JTable table;
-    viewprojectsPage(String a){
+    vpPage(String a){
         this.cid = a;
             defaultTableModel = new DefaultTableModel();
             table = new JTable(defaultTableModel);
@@ -23,13 +23,14 @@ class viewprojectsPage extends JFrame{
             table.setFillsViewportHeight(true);
 
             defaultTableModel.addColumn("PROJECT ID");
+            
             defaultTableModel.addColumn("Start Date");
             defaultTableModel.addColumn("Phase");
             defaultTableModel.addColumn("Expected End Date");
             this.add(new JScrollPane(table));
             try{
                 Connection connection = DriverManager.getConnection(jdbcURL, username, password);
-                String sql= "select project_id,start_date, phase, expected_end_date from projects where customer_id=?";
+                String sql= "select * from projects";
                 String sql1 = "select customer_id from customer_auth where username=?";
                 PreparedStatement st1 = connection.prepareStatement(sql1);
                 st1.setString(1,cid);
@@ -63,7 +64,7 @@ class viewprojectsPage extends JFrame{
 }         
 }
 
-public class viewprojects {
+public class vp {
     public static void main(String args[]){
         viewprojectsPage vp = new viewprojectsPage("c1");
     }
