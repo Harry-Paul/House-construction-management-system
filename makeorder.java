@@ -56,66 +56,58 @@ class MO extends JFrame implements ActionListener
         constraints.insets = new Insets(5, 5, 5, 5);
         constraints.gridx = 0;
         constraints.gridy = 1;
-        Head.add(u1, constraints);
-
-        constraints.gridx = 1;
-        constraints.gridy = 1;
-        Head.add(t1, constraints);
-
-        constraints.gridx = 0;
-        constraints.gridy = 2;
 
         Head.add(u2, constraints);
 
         constraints.gridx = 1;
-        constraints.gridy = 2;
+        constraints.gridy = 1;
         Head.add(t2 , constraints);
 
         constraints.gridx = 0;
-        constraints.gridy = 3;
+        constraints.gridy = 2;
 
         Head.add(u3, constraints);
 
         constraints.gridx = 1;
-        constraints.gridy = 3;
+        constraints.gridy = 2;
         Head.add(t3, constraints);
 
         constraints.gridx = 0;
-        constraints.gridy = 4;
+        constraints.gridy = 3;
 
         Head.add(u4, constraints);
 
         constraints.gridx = 1;
-        constraints.gridy = 4;
+        constraints.gridy = 3;
         Head.add(t4, constraints);
 
         constraints.gridx = 0;
-        constraints.gridy = 5;
+        constraints.gridy = 4;
 
         Head.add(u5, constraints);
 
         constraints.gridx = 1;
-        constraints.gridy = 5;
+        constraints.gridy = 4;
         Head.add(t5, constraints);
 
         constraints.gridx = 0;
-        constraints.gridy = 6;
+        constraints.gridy = 5;
         constraints.gridwidth = 2;
         Head.add(calculate, constraints);
 
         constraints.gridx = 0;
-        constraints.gridy = 7;
+        constraints.gridy = 6;
 
         Head.add(u6, constraints);
 
         constraints.gridx = 1;
-        constraints.gridy = 7;
+        constraints.gridy = 6;
     
         Head.add(u7, constraints);
 
 
         constraints.gridx = 0;
-        constraints.gridy = 8;
+        constraints.gridy = 7;
         constraints.gridwidth = 2;
         Head.add(b1,constraints);
 
@@ -138,7 +130,7 @@ class MO extends JFrame implements ActionListener
             PreparedStatement stmt = connection.prepareStatement(sql);
             ResultSet st = stmt.executeQuery();
             int i=0;
-            while(st.next()){
+            while(st.next()){ 
                 String coid = st.getString("comm_id");
                 String rid = st.getString("retailer_id");
                 int qua = st.getInt("quantity");
@@ -175,14 +167,14 @@ class MO extends JFrame implements ActionListener
                 id3 = t3.getText();
                 id5 = Integer.parseInt(t5.getText());
                 Connection connection = DriverManager.getConnection(jdbcURL, username, password);
-                String sql = "select price from retailer_commodities where comm_id = ? and retailer_id=?";
+                String sql = "select price_per_unit from retailer_commodities where comm_id = ? and retailer_id=?";
                 PreparedStatement stmt = connection.prepareStatement(sql);
                 stmt.setString(1,id2);
                 stmt.setString(2,id3);
                 System.out.println(id2);
                 ResultSet st = stmt.executeQuery();
                 if(st.next()){
-                rate = st.getInt("price") * id5;
+                rate = st.getInt("price_per_unit") * id5;
                 Rate =Integer.toString(rate);
                 u7.setText(Rate);
                 System.out.println(Rate);
