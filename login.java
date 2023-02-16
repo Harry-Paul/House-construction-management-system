@@ -96,6 +96,7 @@ class LoginPage extends JFrame implements ActionListener {
                         CustomerPage cp = new CustomerPage(us);
                         cp.setVisible(true);
                         cp.setSize(800,600);
+                        dispose();
                     }
                     else{
                         usernotfound();
@@ -111,6 +112,7 @@ class LoginPage extends JFrame implements ActionListener {
                         RetailerPage rp = new RetailerPage(us);
                         rp.setVisible(true);
                         rp.setSize(800,600);
+                        dispose();
                         }
                     else{
                         usernotfound();

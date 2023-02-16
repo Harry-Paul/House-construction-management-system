@@ -105,39 +105,59 @@ class acceptorderPage extends JFrame implements ActionListener
                 Connection connection = DriverManager.getConnection(jdbcURL, username, password);
                     id1 = t1.getText();
                     String sql = "insert into payment_retailer values (?, ?, ?, ?)";
-                    String sql1 = "select retailer_id, rate from orders where order_id = ?";
-                    String sql2 = "select max(payment_retailer_id) from payment_retailer";
+                    String sql1 = "select retailer_id, rate, quantity, comm_id from orders where order_id = ?";
+                    String sql2 = "select max(cast(substring(payment_retailer_id,2) as int)) from payment_retailer";
                     String sql3 = "select * from payment_retailer";
+                    String sql4 = "select quantity from retailer_commodities where comm_id=? and username=?";
+                    String sql5 = "update retailer_commodities set quantity=? where comm_id=? and username=?";
                     PreparedStatement stmt = connection.prepareStatement(sql);
                     PreparedStatement stmt1 = connection.prepareStatement(sql1);
                     PreparedStatement stmt2 = connection.prepareStatement(sql2);
                     PreparedStatement stmt3 = connection.prepareStatement(sql3);
+                    PreparedStatement stmt4 = connection.prepareStatement(sql4);
+                    PreparedStatement stmt5 = connection.prepareStatement(sql5);
                     stmt1.setString(1,id1);
                     ResultSet st1 = stmt1.executeQuery();
                     ResultSet st3 = stmt3.executeQuery();
                     String rid="";
                     String prid="p1";
                     int rate=0;
+                    int qua=0;
+                    int qua1=0;
+                    String commid="";
                     if(st1.next()){
                         rid= st1.getString("retailer_id");
                         rate = st1.getInt("rate");
+                        qua1 = st1.getInt("quantity");
+                        commid= st1.getString("comm_id");
                     }
                     ResultSet st2 = stmt2.executeQuery();
                     if(st3.next() && st2.next()){
-                        String a= st2.getString("max");
-                        String b = a.substring(1);
-                        prid = "p"+Integer.toString(Integer.parseInt(b)+1);
+                        int a= st2.getInt("max");
+                        prid = "p"+Integer.toString(a+1);
                     }
+                    
                     System.out.println(prid);
                     stmt.setString(1,prid);
                     stmt.setString(2,rid);
                     stmt.setString(3,id1);
                     stmt.setInt(4,rate);
                     stmt.executeUpdate();
-                    String sql4="delete from orders where order_id=?";
-                    PreparedStatement stmt4 = connection.prepareStatement(sql4);
-                    stmt4.setString(1,id1);
-                    stmt4.executeUpdate();
+                    stmt4.setString(1,commid);
+                    stmt4.setString(2,rid);
+                    ResultSet st4 = stmt4.executeQuery();
+                    if(st4.next()){
+                        qua = st4.getInt("quantity");
+                    }
+                    System.out.println(qua+" "+qua1);
+                    stmt5.setInt(1,qua-qua1);
+                    stmt5.setString(2,commid);
+                    stmt5.setString(3,rid);
+                    stmt5.executeUpdate();
+                    String sql6="delete from orders where order_id=?";
+                    PreparedStatement stmt6 = connection.prepareStatement(sql6);
+                    stmt6.setString(1,id1);
+                    stmt6.executeUpdate();
                     connection.close();
                     Body.removeAll();
                     Body.revalidate();
@@ -156,6 +176,6 @@ class acceptorderPage extends JFrame implements ActionListener
 
 public class acceptorder {
     public static void main(String args[]){
-        acceptorderPage mk = new acceptorderPage("abcd");
+        acceptorderPage mk = new acceptorderPage("powerg");
     }
 }

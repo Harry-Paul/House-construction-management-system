@@ -18,7 +18,6 @@ class veiwpaymentPage extends JFrame{
         table.setFillsViewportHeight(true);
 
         defaultTableModel.addColumn("Payment ID");
-        defaultTableModel.addColumn("Retailer ID");
         defaultTableModel.addColumn("Order ID");
         defaultTableModel.addColumn("Amount");
         this.add(new JScrollPane(table));
@@ -34,11 +33,10 @@ class veiwpaymentPage extends JFrame{
             int i=0;
             while(st.next()){
                 String prid = st.getString("payment_retailer_id");
-                String rid = st.getString("retailer_id");
                 String oid = st.getString("order_id");
                 int amount = st.getInt("to_recieve");
                 i++;
-                defaultTableModel.addRow(new Object[]{prid,rid,oid,amount});
+                defaultTableModel.addRow(new Object[]{prid,oid,amount});
                 System.out.println("a");
             }
         }

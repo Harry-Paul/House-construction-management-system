@@ -157,7 +157,11 @@ class MO extends JFrame implements ActionListener
       
        JOptionPane.showMessageDialog(frame, "Enter Valid Data","Error", JOptionPane.ERROR_MESSAGE);
     }
-
+    public void dialogbox1(){
+        JFrame frame = new JFrame("Main Window");
+      
+       JOptionPane.showMessageDialog(frame, "Not Enough quantiy is not present with the retailer","Error", JOptionPane.ERROR_MESSAGE);
+    }
 
     public void actionPerformed(ActionEvent e){
                 
@@ -188,8 +192,6 @@ class MO extends JFrame implements ActionListener
         }
         else if(e.getSource() == b1){
             try{
-                
-
                 Connection connection = DriverManager.getConnection(jdbcURL, username, password);
                 String sql3 = "select max(order_id) from orders";
                 String sql2 = "select * from orders";
@@ -210,17 +212,31 @@ class MO extends JFrame implements ActionListener
                 id6 = Integer.parseInt(t5.getText());
                     System.out.println("Connected");
                     String sql = "insert into orders values (?, ?, ?, ?, ?, ?)";
+                    String sql1 = "select quantity from retailer_commodities where comm_id=? and username=?";
                     PreparedStatement stmt = connection.prepareStatement(sql);
-                    stmt.setString(1,oid);
-                    stmt.setString(2,id2);
-                    stmt.setString(3,id3);
-                    stmt.setString(4,id4);
-                    stmt.setInt(5,id5);
-                    stmt.setInt(6,rate);
-                    stmt.executeUpdate();
-                    connection.close();
+                    PreparedStatement stmt1 = connection.prepareStatement(sql1);
+                    stmt1.setString(1, id2);
+                    stmt1.setString(2, id3);
+                    ResultSet rs1 = stmt1.executeQuery();
+                    int qua = 0;
+                    if(rs1.next()){
+                        qua = rs1.getInt("quantity");
+                    }
+                    if(qua>=id6){
+                        stmt.setString(1,oid);
+                        stmt.setString(2,id2);
+                        stmt.setString(3,id3);
+                        stmt.setString(4,id4);
+                        stmt.setInt(5,id5);
+                        stmt.setInt(6,rate);
+                        stmt.executeUpdate();
+                        connection.close();
+                    }
+                    else{
+                        dialogbox1();
                     }
                 }
+            }
                 catch(Exception ae){
                     dialogbox();
                     System.out.println("Exception");

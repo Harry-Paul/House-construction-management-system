@@ -199,7 +199,7 @@ class NO extends JFrame implements ActionListener
                 
 
                 Connection connection = DriverManager.getConnection(jdbcURL, username, password);
-                String sql3 = "select max(order_id) from orders";
+                String sql3 = "select max(cast(substring(order_id,2) as int)) from orders ;";
                 String sql2 = "select * from orders";
                 PreparedStatement st3 = connection.prepareStatement(sql3);
                 PreparedStatement st2 = connection.prepareStatement(sql2);
@@ -207,9 +207,8 @@ class NO extends JFrame implements ActionListener
                 ResultSet rs2 = st2.executeQuery();
                 String oid = "o1";
                 if(rs3.next() && rs2.next()){
-                    String q = rs3.getString("max");
-                    String w = q.substring(1);
-                    oid = "o" + Integer.toString(Integer.parseInt(w)+1);
+                    int q = rs3.getInt("max");
+                    oid = "o" + Integer.toString(q+1);
                 }
                 if(id1!=""){
                 id2 = t2.getText();

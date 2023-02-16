@@ -154,7 +154,7 @@ class signuppage extends JFrame implements ActionListener{
                     if(text.equals("Customer")){
                         sql = "insert into customers values (?, ?, ?, ?, ?)";
                         sql1 = "insert into customer_auth values(?,?,?)";
-                        String s = "select max(customer_id) from customers";
+                        String s = "select max(cast(substring(customer_id,2) as int)) from customers";
                         String sq = "select * from customers";
                         PreparedStatement st = connection.prepareStatement(s);
                         PreparedStatement stm = connection.prepareStatement(sq);
@@ -162,15 +162,14 @@ class signuppage extends JFrame implements ActionListener{
                         ResultSet rs = stm.executeQuery();
                         id = "c1";
                         if(r.next() && rs.next()){
-                            String a = r.getString("max");
-                            String w = a.substring(1);
-                            id = "c"+Integer.toString(Integer.parseInt(w)+1);
+                            int a = r.getInt("max");
+                            id = "c"+Integer.toString(a+1);
                         }
                     }
                     else if(text.equals("Retailer")){
                         sql = "insert into retailers values (?, ?, ?, ?, ?)";
                         sql1 = "insert into retailer_auth values(?,?,?)";
-                        String s1 = "select max(retailer_id) from retailers";
+                        String s1 = "select max(cast(substring(retailer_id,2) as int)) from retailers";
                         String sq1 = "select * from retailers";
                         PreparedStatement st1 = connection.prepareStatement(s1);
                         PreparedStatement stm1 = connection.prepareStatement(sq1);
@@ -178,9 +177,8 @@ class signuppage extends JFrame implements ActionListener{
                         ResultSet rs1 = stm1.executeQuery();
                         id = "r1";
                         if(r1.next() && rs1.next()){
-                            String a = r1.getString("max");
-                            String w = a.substring(1);
-                            id ="r" +Integer.toString(Integer.parseInt(w)+1);
+                            int a = r1.getInt("max");
+                            id ="r" +Integer.toString(a+1);
                         }
                     }  
                         PreparedStatement stmt = connection.prepareStatement(sql);

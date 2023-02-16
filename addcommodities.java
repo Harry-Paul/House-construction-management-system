@@ -81,7 +81,6 @@ class addcommoditiesPage extends JFrame implements ActionListener{
         constraints.gridy = 1;
         Head.add(update_data, constraints);
 
-       
         loaddata();
         addcomm.addActionListener(this);
         update_data.addActionListener(this);
@@ -294,10 +293,11 @@ class addcommoditiesPage extends JFrame implements ActionListener{
     public void loaddata(){
         defaultTableModel = new DefaultTableModel();
         table = new JTable(defaultTableModel);
-        table.setPreferredScrollableViewportSize(new Dimension(300, 200));
+        table.setPreferredScrollableViewportSize(new Dimension(400, 150));
         table.setFillsViewportHeight(true);
 
         defaultTableModel.addColumn("Commodity ID");
+        defaultTableModel.addColumn("Commodity Name");
         defaultTableModel.addColumn("Quantity");
         defaultTableModel.addColumn("Unit");
         defaultTableModel.addColumn("Price Per Unit");
@@ -309,17 +309,20 @@ class addcommoditiesPage extends JFrame implements ActionListener{
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setString(1,rid);
             ResultSet st = stmt.executeQuery();
-            int i=0;
+            
             while(st.next()){
                 String prid = st.getString("comm_id");
                 int qua = st.getInt("quantity");
                 String unit = st.getString("unit");
                 int ppu = st.getInt("price_per_unit");
-                i++;
-                defaultTableModel.addRow(new Object[]{prid,qua,unit,ppu});
-                System.out.println("a");
-                
-
+                String sql1 = "select comm_name from commodities where comm_id=?";
+                PreparedStatement stmt1 = connection.prepareStatement(sql1);
+                stmt1.setString(1,prid);
+                ResultSet st1 = stmt1.executeQuery();
+                if(st1.next()){
+                    String commname = st1.getString("comm_name");
+                    defaultTableModel.addRow(new Object[]{prid,commname,qua,unit,ppu});
+                }
             }
         }
         catch(Exception ae){
@@ -331,7 +334,7 @@ class addcommoditiesPage extends JFrame implements ActionListener{
     public void loaddata1(){
         defaultTableModel1 = new DefaultTableModel();
         table1 = new JTable(defaultTableModel1);
-        table1.setPreferredScrollableViewportSize(new Dimension(300, 200));
+        table1.setPreferredScrollableViewportSize(new Dimension(400, 150));
         table1.setFillsViewportHeight(true);
 
         defaultTableModel1.addColumn("Commodity ID");
@@ -434,29 +437,24 @@ class addcommoditiesPage extends JFrame implements ActionListener{
                 System.out.println(14);
                 Connection connection = DriverManager.getConnection(jdbcURL, username, password);
                 id3 = t3.getText();
-                id4 = Integer.parseInt(t4.getText());
-                id5 = Integer.parseInt(t5.getText());
                 id6 = t6.getText();
                 System.out.println("Connected");
                 String comm_id = "co1";
-                String sql4 = "select max(comm_id) from commodities";
+                String sql4 = "select max(cast(substring(comm_id,3) as int)) from commodities ;";
                 String s = "select * from commodities";
                 PreparedStatement st =  connection.prepareStatement(s);
                 ResultSet r = st.executeQuery();
                 PreparedStatement stmt4 = connection.prepareStatement(sql4);
                 ResultSet rs4 = stmt4.executeQuery();
                 if(rs4.next() && r.next()){
-                    String q = rs4.getString("max");
-                    String w = q.substring(2);
-                    comm_id = "co"+ Integer.toString(Integer.parseInt(w)+1);
+                    int q = rs4.getInt("max");
+                    comm_id = "co"+ Integer.toString(q+1);
                 }
-                String sql5 = "insert into commodities values(?,?,?,?,?)";
+                String sql5 = "insert into commodities values(?,?,?)";
                 PreparedStatement stmt5 = connection.prepareStatement(sql5);
                 stmt5.setString(1,comm_id);
                 stmt5.setString(2,id3);
-                stmt5.setInt(3,id4);
-                stmt5.setString(4,id6);
-                stmt5.setInt(5,id5);
+                stmt5.setString(3,id6);
                 stmt5.executeUpdate();
                 System.out.println(id3+id4+id5+id6);
                 
@@ -497,7 +495,7 @@ class addcommoditiesPage extends JFrame implements ActionListener{
         }
         else if(e.getSource() == update_price){
             try{
-                sql = "update retailer_commodities set price_per_unit=? where comm_id=? and retailer_id=?";
+                sql = "update retailer_commodities set price_per_unit=? where comm_id=? and username=?";
                 u2.setText("New Price");
                 changedata();
                 }
@@ -510,7 +508,7 @@ class addcommoditiesPage extends JFrame implements ActionListener{
         }
         else if(e.getSource()==update_quantity){
             try{
-                sql = "update retailer_commodities set quantity=? where comm_id=? and retailer_id=?";
+                sql = "update retailer_commodities set quantity=? where comm_id=? and username=?";
                 u2.setText("New Quantity");
                 changedata();
                 }
@@ -525,6 +523,6 @@ class addcommoditiesPage extends JFrame implements ActionListener{
 
 public class addcommodities {
     public static void main(String args[]){
-        addcommoditiesPage ac = new addcommoditiesPage("abcd");
+        addcommoditiesPage ac = new addcommoditiesPage("powerg");
     }
 }
