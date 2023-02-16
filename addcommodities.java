@@ -305,7 +305,7 @@ class addcommoditiesPage extends JFrame implements ActionListener{
         this.add(Body);
         try{
             Connection connection = DriverManager.getConnection(jdbcURL, username, password);
-            String sql= "select comm_id,quantity,unit,price_per_unit from retailer_commodities where retailer_id=?";
+            String sql= "select comm_id,quantity,unit,price_per_unit from retailer_commodities where username=?";
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setString(1,rid);
             ResultSet st = stmt.executeQuery();
@@ -336,9 +336,7 @@ class addcommoditiesPage extends JFrame implements ActionListener{
 
         defaultTableModel1.addColumn("Commodity ID");
         defaultTableModel1.addColumn("Commodity Name");
-        defaultTableModel1.addColumn("Quantity");
         defaultTableModel1.addColumn("Unit");
-        defaultTableModel1.addColumn("Price per Unit");
         Head.setBounds(0,400,500,300);
         Body.add(new JScrollPane(table1));
         try{
@@ -350,11 +348,9 @@ class addcommoditiesPage extends JFrame implements ActionListener{
             while(st1.next()){
                 String coid = st1.getString("comm_id");
                 String coname = st1.getString("comm_name");
-                int qua = st1.getInt("quantity");
                 String unit = st1.getString("unit");
-                int ppu = st1.getInt("price_per_unit");
                 i++;
-                defaultTableModel1.addRow(new Object[]{coid,coname,qua,unit,ppu});
+                defaultTableModel1.addRow(new Object[]{coid,coname,unit});
                 System.out.println("a");
                 
 

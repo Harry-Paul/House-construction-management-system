@@ -121,6 +121,7 @@ class LoginPage extends JFrame implements ActionListener {
                         AdminPage ap  = new AdminPage();
                         ap.setVisible(true);
                         ap.setSize(800,600);
+                        dispose();
                     }
                     else{
                         usernotfound();

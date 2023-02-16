@@ -41,7 +41,7 @@ class MO extends JFrame implements ActionListener
         Head.setLayout(new GridBagLayout());      
         GridBagConstraints constraints = new GridBagConstraints();
         u2 = new JLabel("Commodity ID");
-        u3 = new JLabel("Retailer ID");
+        u3 = new JLabel("Retailer");
         u4 = new JLabel("Project ID");
         u5 = new JLabel("Quanity");
         u6 = new JLabel("Price :     ");
@@ -117,7 +117,7 @@ class MO extends JFrame implements ActionListener
         table.setFillsViewportHeight(true);
 
         defaultTableModel.addColumn("Commodity ID");
-        defaultTableModel.addColumn("Retailer ID");
+        defaultTableModel.addColumn("Retailer");
         defaultTableModel.addColumn("Quantity");
         defaultTableModel.addColumn("Unit");
         defaultTableModel.addColumn("Price Per Unit");
@@ -132,7 +132,7 @@ class MO extends JFrame implements ActionListener
             int i=0;
             while(st.next()){ 
                 String coid = st.getString("comm_id");
-                String rid = st.getString("retailer_id");
+                String rid = st.getString("username");
                 int qua = st.getInt("quantity");
                 String unit = st.getString("unit");
                 int ppu = st.getInt("price_per_unit");
@@ -167,7 +167,7 @@ class MO extends JFrame implements ActionListener
                 id3 = t3.getText();
                 id5 = Integer.parseInt(t5.getText());
                 Connection connection = DriverManager.getConnection(jdbcURL, username, password);
-                String sql = "select price_per_unit from retailer_commodities where comm_id = ? and retailer_id=?";
+                String sql = "select price_per_unit from retailer_commodities where comm_id = ? and username=?";
                 PreparedStatement stmt = connection.prepareStatement(sql);
                 stmt.setString(1,id2);
                 stmt.setString(2,id3);
