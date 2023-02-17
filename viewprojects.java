@@ -5,6 +5,8 @@ import java.sql.*;
 import java.sql.SQLException;
 import javax.swing.table.DefaultTableModel;
 
+import com.formdev.flatlaf.intellijthemes.FlatArcDarkIJTheme;
+
 class viewprojectsPage extends JFrame{
 
     final String jdbcURL = "jdbc:postgresql://localhost:5432/HCMS";
@@ -16,6 +18,7 @@ class viewprojectsPage extends JFrame{
     DefaultTableModel defaultTableModel;
     JTable table;
     viewprojectsPage(String a){
+        FlatArcDarkIJTheme.setup();
         this.cid = a;
             defaultTableModel = new DefaultTableModel();
             table = new JTable(defaultTableModel);

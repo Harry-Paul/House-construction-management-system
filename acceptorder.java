@@ -5,6 +5,8 @@ import java.sql.*;
 import java.sql.SQLException;
 import javax.swing.table.DefaultTableModel;
 
+import com.formdev.flatlaf.intellijthemes.FlatArcDarkIJTheme;
+
 class acceptorderPage extends JFrame implements ActionListener  
 {   
     JButton b1;   
@@ -23,6 +25,7 @@ class acceptorderPage extends JFrame implements ActionListener
     String RetailerID;
     acceptorderPage(String a)  
     {   
+        FlatArcDarkIJTheme.setup();
         RetailerID = a;
         Head = new JPanel();
         Body = new JPanel();

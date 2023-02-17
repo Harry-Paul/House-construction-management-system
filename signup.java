@@ -1,5 +1,8 @@
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+
+import com.formdev.flatlaf.intellijthemes.FlatArcDarkIJTheme;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
@@ -30,12 +33,13 @@ class signuppage extends JFrame implements ActionListener{
     final String jdbcURL = "jdbc:postgresql://localhost:5432/HCMS";
     final String username = "postgres";
     final String password = "1234";  
+    JPanel Head;
 
-    public signuppage() {
-        super("Signup Page");
-        this.setSize(800, 800);
-
-        setLayout(new GridBagLayout());
+    signuppage() {
+        FlatArcDarkIJTheme.setup();
+        Head = new JPanel();
+        Head.setBounds(0,0,800,800);
+        Head.setLayout(new GridBagLayout());
         
         GridBagConstraints constraints = new GridBagConstraints();
 
@@ -48,9 +52,7 @@ class signuppage extends JFrame implements ActionListener{
         passwordLabel = new JLabel("Password:");
         
         siginasComboBox = new JComboBox<>(new String[] { "Customer", "Retailer" });
-        siginasComboBox.setBackground(Color.orange) ;
         siginasComboBox.setBorder (new EmptyBorder(2, 2, 2, 2));
-        siginasComboBox.setEditable(true);
 
         t1 = new JTextField(20);
         t2 = new JTextField(20);
@@ -63,68 +65,69 @@ class signuppage extends JFrame implements ActionListener{
         constraints.gridx = 0;
         constraints.gridy = 0;
         constraints.insets = new Insets(5, 5, 5, 5);
-        add(signinasLabel, constraints);
+        Head.add(signinasLabel, constraints);
 
         constraints.gridx = 1;
-        add(siginasComboBox, constraints);
+        Head.add(siginasComboBox, constraints);
 
         constraints.gridx = 0;
         constraints.gridy = 1;
-        add(u1, constraints);
+        Head.add(u1, constraints);
 
         constraints.gridx = 1;
         constraints.gridy = 1;
-        add(t1, constraints);
+        Head.add(t1, constraints);
 
         constraints.gridx = 0;
         constraints.gridy = 2;
 
-        add(u2, constraints);
+        Head.add(u2, constraints);
 
         constraints.gridx = 1;
         constraints.gridy = 2;
-        add(t2 , constraints);
+        Head.add(t2 , constraints);
 
         constraints.gridx = 0;
         constraints.gridy = 3;
 
-        add(u3, constraints);
+        Head.add(u3, constraints);
 
         constraints.gridx = 1;
         constraints.gridy = 3;
-        add(t3, constraints);
+        Head.add(t3, constraints);
 
         constraints.gridx = 0;
         constraints.gridy = 4;
 
-        add(u4, constraints);
+        Head.add(u4, constraints);
 
         constraints.gridx = 1;
         constraints.gridy = 4;
-        add(t4, constraints);
+        Head.add(t4, constraints);
 
         constraints.gridx = 0;
         constraints.gridy = 5;
 
-        add(u5, constraints);
+        Head.add(u5, constraints);
 
         constraints.gridx = 1;
         constraints.gridy = 5;
-        add(t5, constraints);
+        Head.add(t5, constraints);
 
         constraints.gridx = 0;
         constraints.gridy = 6;
 
-        add(passwordLabel, constraints);
+        Head.add(passwordLabel, constraints);
 
         constraints.gridx = 1;
         constraints.gridy=6;
-        add(passwordField, constraints);
+        Head.add(passwordField, constraints);
 
         constraints.gridx = 0;
         constraints.gridy = 7;
         constraints.gridwidth = 2;
-        add(loginButton, constraints);
+        Head.add(loginButton, constraints);
+        this.add(Head);
         this.setVisible(true);
         this.setSize(600,600);
         this.setLocationRelativeTo(null); 

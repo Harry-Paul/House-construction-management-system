@@ -5,6 +5,8 @@ import java.sql.*;
 import java.sql.SQLException;
 import javax.swing.table.DefaultTableModel;
 
+import com.formdev.flatlaf.intellijthemes.FlatArcDarkIJTheme;
+
 class CustomerPage extends JFrame implements ActionListener{
     JLabel title;
     JLabel h1;
@@ -24,6 +26,7 @@ class CustomerPage extends JFrame implements ActionListener{
     Image img3;
     String CustomerID;
     CustomerPage(String a){
+        FlatArcDarkIJTheme.setup();
         CustomerID = a;
         head= new JPanel();
         head.setBackground(Color.DARK_GRAY);

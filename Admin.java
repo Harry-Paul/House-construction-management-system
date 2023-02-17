@@ -1,4 +1,7 @@
 import javax.swing.*;
+
+import com.formdev.flatlaf.intellijthemes.FlatArcDarkIJTheme;
+
 import java.awt.*;
 import java.awt.event.*;
 class AdminPage extends JFrame implements ActionListener{
@@ -19,6 +22,7 @@ class AdminPage extends JFrame implements ActionListener{
     Image img2;
     Image img3;
     AdminPage(){
+        FlatArcDarkIJTheme.setup();
         head= new JPanel();
         head.setBackground(Color.DARK_GRAY);
         head.setBounds(0,0,800,100);

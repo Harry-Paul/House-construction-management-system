@@ -1,6 +1,9 @@
 {
     "java.project.referencedLibraries": [
         "lib/**/*.jar",
-        "c:\\Users\\harry\\Downloads\\postgresql-42.5.1.jar"
+        "c:\\Users\\harry\\Downloads\\postgresql-42.5.1.jar",
+        "flatlaf-3.0.jar",
+        "flatlaf-theme-editor-3.0.jar",
+        "flatlaf-intellij-themes-3.0.jar"
     ]
 }

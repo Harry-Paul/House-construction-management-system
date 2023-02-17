@@ -5,6 +5,8 @@ import java.sql.*;
 import java.sql.SQLException;
 import javax.swing.table.DefaultTableModel;
 
+import com.formdev.flatlaf.intellijthemes.FlatArcDarkIJTheme;
+
 class veiwpaymentPage extends JFrame{
     final String jdbcURL = "jdbc:postgresql://localhost:5432/HCMS";
     final String username = "postgres";
@@ -12,6 +14,7 @@ class veiwpaymentPage extends JFrame{
     DefaultTableModel defaultTableModel;
     JTable table;
     veiwpaymentPage(){
+        FlatArcDarkIJTheme.setup();
         defaultTableModel = new DefaultTableModel();
         table = new JTable(defaultTableModel);
         table.setPreferredScrollableViewportSize(new Dimension(300, 200));

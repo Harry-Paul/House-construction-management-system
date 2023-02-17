@@ -5,6 +5,9 @@ import java.sql.*;
 import java.sql.SQLException;
 import javax.swing.table.DefaultTableModel;
 
+import com.formdev.flatlaf.FlatDarkLaf;
+import com.formdev.flatlaf.intellijthemes.FlatArcDarkIJTheme;
+
 class addcommoditiesPage extends JFrame implements ActionListener{
     JButton b1;   
     JButton b2;
@@ -44,6 +47,7 @@ class addcommoditiesPage extends JFrame implements ActionListener{
     PreparedStatement stmt;
 
     addcommoditiesPage(String a){
+       FlatArcDarkIJTheme.setup();
         rid = a;
         Head = new JPanel();
         Body = new JPanel();
@@ -293,7 +297,7 @@ class addcommoditiesPage extends JFrame implements ActionListener{
     public void loaddata(){
         defaultTableModel = new DefaultTableModel();
         table = new JTable(defaultTableModel);
-        table.setPreferredScrollableViewportSize(new Dimension(400, 150));
+        table.setPreferredScrollableViewportSize(new Dimension(500, 150));
         table.setFillsViewportHeight(true);
 
         defaultTableModel.addColumn("Commodity ID");
@@ -334,7 +338,7 @@ class addcommoditiesPage extends JFrame implements ActionListener{
     public void loaddata1(){
         defaultTableModel1 = new DefaultTableModel();
         table1 = new JTable(defaultTableModel1);
-        table1.setPreferredScrollableViewportSize(new Dimension(400, 150));
+        table1.setPreferredScrollableViewportSize(new Dimension(500, 150));
         table1.setFillsViewportHeight(true);
 
         defaultTableModel1.addColumn("Commodity ID");

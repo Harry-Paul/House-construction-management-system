@@ -5,6 +5,8 @@ import java.sql.*;
 import java.sql.SQLException;
 import javax.swing.table.DefaultTableModel;
 
+import com.formdev.flatlaf.intellijthemes.FlatArcDarkIJTheme;
+
 class MO extends JFrame implements ActionListener  
 {   
     JButton b1;   
@@ -34,6 +36,7 @@ class MO extends JFrame implements ActionListener
     JPanel Head;
     MO()  
     {   
+        FlatArcDarkIJTheme.setup();
         Head = new JPanel();
         Body = new JPanel();
         Head.setBounds(0,200,500,400);
