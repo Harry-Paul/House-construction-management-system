@@ -66,6 +66,6 @@ class vpPage extends JFrame{
 
 public class vp {
     public static void main(String args[]){
-        viewprojectsPage vp = new viewprojectsPage("c1");
+        viewprojectsPage vp = new viewprojectsPage("cinostruct");
     }
 }

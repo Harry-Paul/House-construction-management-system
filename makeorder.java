@@ -116,7 +116,7 @@ class MO extends JFrame implements ActionListener
 
         defaultTableModel = new DefaultTableModel();
         table = new JTable(defaultTableModel);
-        table.setPreferredScrollableViewportSize(new Dimension(300, 200));
+        table.setPreferredScrollableViewportSize(new Dimension(500, 200));
         table.setFillsViewportHeight(true);
 
         defaultTableModel.addColumn("Commodity ID");
@@ -149,7 +149,7 @@ class MO extends JFrame implements ActionListener
             ae.printStackTrace();
         } 
         this.setVisible(true);
-        this.setSize(500,600);
+        this.setSize(600,600);
         this.setLocationRelativeTo(null); 
         calculate.addActionListener(this);
         b1.addActionListener(this);     

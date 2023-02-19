@@ -5,6 +5,8 @@ import java.sql.*;
 import java.sql.SQLException;
 import javax.swing.table.DefaultTableModel;
 
+import com.formdev.flatlaf.intellijthemes.FlatArcDarkIJTheme;
+
 class makepaymentPage extends JFrame implements ActionListener  
 {   
     JButton b1;   
@@ -24,7 +26,8 @@ class makepaymentPage extends JFrame implements ActionListener
     JPanel Body;
     JPanel Head;
     makepaymentPage()  
-    {   
+    {  
+        FlatArcDarkIJTheme.setup(); 
         Head = new JPanel();
         Body = new JPanel();
         Head.setBounds(0,200,500,400);
@@ -78,7 +81,7 @@ class makepaymentPage extends JFrame implements ActionListener
     public void loaddata(){
         defaultTableModel = new DefaultTableModel();
         table = new JTable(defaultTableModel);
-        table.setPreferredScrollableViewportSize(new Dimension(300, 200));
+        table.setPreferredScrollableViewportSize(new Dimension(400, 200));
         table.setFillsViewportHeight(true);
 
         defaultTableModel.addColumn("Payment ID");

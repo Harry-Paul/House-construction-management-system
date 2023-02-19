@@ -13,11 +13,13 @@ class veiwpaymentPage extends JFrame{
     final String password = "1234";  
     DefaultTableModel defaultTableModel;
     JTable table;
-    veiwpaymentPage(){
+    String rid;
+    veiwpaymentPage(String rid){
         FlatArcDarkIJTheme.setup();
+        this.rid= rid;
         defaultTableModel = new DefaultTableModel();
         table = new JTable(defaultTableModel);
-        table.setPreferredScrollableViewportSize(new Dimension(300, 200));
+        table.setPreferredScrollableViewportSize(new Dimension(400, 200));
         table.setFillsViewportHeight(true);
 
         defaultTableModel.addColumn("Payment ID");
@@ -25,13 +27,14 @@ class veiwpaymentPage extends JFrame{
         defaultTableModel.addColumn("Amount");
         this.add(new JScrollPane(table));
         this.setVisible(true);
-        this.setSize(600,600);
+        this.setSize(500,400);
         this.setLocationRelativeTo(null);      
         this.setTitle("View Payment");  
         try{
             Connection connection = DriverManager.getConnection(jdbcURL, username, password);
-            String sql= "select * from payment_retailer";
+            String sql= "select * from payment_retailer where retailer_id=?";
             PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setString(1,rid);
             ResultSet st = stmt.executeQuery();
             int i=0;
             while(st.next()){
@@ -59,6 +62,6 @@ class veiwpaymentPage extends JFrame{
 }
 public class viewpayment {
     public static void main(String args[]){
-        veiwpaymentPage vp = new veiwpaymentPage();
+        veiwpaymentPage vp = new veiwpaymentPage("cinostruct");
     }
 }

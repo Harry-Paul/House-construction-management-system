@@ -1,4 +1,7 @@
 import javax.swing.*;
+
+import com.formdev.flatlaf.intellijthemes.FlatArcDarkIJTheme;
+
 import java.awt.*;
 import java.awt.event.*;
 class RetailerPage extends JFrame implements ActionListener{
@@ -20,7 +23,7 @@ class RetailerPage extends JFrame implements ActionListener{
     Image img3;
     String RetailerID;
     RetailerPage(String a){
-
+        FlatArcDarkIJTheme.setup();
         RetailerID = a;
         
         head= new JPanel();
@@ -67,7 +70,7 @@ class RetailerPage extends JFrame implements ActionListener{
         Body.add(h3);
         this.add(Body);
         b1.addActionListener(this);
-        b2.addActionListener(null);
+        b2.addActionListener(this);
         b3.addActionListener(this);
         this.setVisible(true);
         this.setSize(800,600);
@@ -82,7 +85,7 @@ class RetailerPage extends JFrame implements ActionListener{
             addcommoditiesPage ac = new addcommoditiesPage(RetailerID);
         }
         else if(e.getSource()==b2){
-            viewpayment vp = new viewpayment();
+            veiwpaymentPage vp = new veiwpaymentPage(RetailerID);
         }
     }
 }

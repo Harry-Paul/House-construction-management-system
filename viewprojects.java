@@ -22,7 +22,7 @@ class viewprojectsPage extends JFrame{
         this.cid = a;
             defaultTableModel = new DefaultTableModel();
             table = new JTable(defaultTableModel);
-            table.setPreferredScrollableViewportSize(new Dimension(300, 200));
+            table.setPreferredScrollableViewportSize(new Dimension(400, 200));
             table.setFillsViewportHeight(true);
 
             defaultTableModel.addColumn("PROJECT ID");
@@ -60,7 +60,7 @@ class viewprojectsPage extends JFrame{
             } 
 
         this.setVisible(true);
-        this.setSize(500,600);
+        this.setSize(500,400);
         this.setLocationRelativeTo(null);      
         setTitle("New Order"); 
 }         

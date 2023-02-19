@@ -68,7 +68,7 @@ class acceptorderPage extends JFrame implements ActionListener
     public void loaddata(){
         defaultTableModel = new DefaultTableModel();
         table = new JTable(defaultTableModel);
-        table.setPreferredScrollableViewportSize(new Dimension(300, 200));
+        table.setPreferredScrollableViewportSize(new Dimension(400, 200));
         table.setFillsViewportHeight(true);
 
         defaultTableModel.addColumn("Order ID");
