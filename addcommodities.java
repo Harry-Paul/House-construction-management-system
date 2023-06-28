@@ -360,7 +360,6 @@ class addcommoditiesPage extends JFrame implements ActionListener{
                 defaultTableModel1.addRow(new Object[]{coid,coname,unit});
                 System.out.println("a");
                 
-
             }
         }
         catch(Exception ae){

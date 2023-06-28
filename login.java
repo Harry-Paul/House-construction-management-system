@@ -36,7 +36,7 @@ class LoginPage extends JFrame implements ActionListener {
         siginasComboBox = new JComboBox<>(new String[] { "Admin", "Customer", "Retailer" });
         siginasComboBox.setBorder (new EmptyBorder(2, 2, 2, 2));
 
-        usernameField = new JTextField(20);
+        usernameField = new JTextField("username",20);
         
         passwordField = new JPasswordField(20);
         loginButton = new JButton("Login");
